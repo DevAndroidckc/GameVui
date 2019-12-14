@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayGame"
+    tools:context=".ChoiGameActivity"
     android:background="@drawable/anhnen1">
 
     <TextView
@@ -128,19 +128,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginTop="24dp"
-        android:onClick="click5050"
+        android:layout_marginEnd="27dp"
         android:background="@drawable/my_button1"
+        android:onClick="click5050"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_goi_dien_nguoi_than"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_coin"
         app:srcCompat="@mipmap/ic_5050" />
 
-   <ImageButton
+    <ImageButton
         android:id="@+id/imageButton_to_tu_van"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
+        android:layout_marginEnd="27dp"
         android:background="@drawable/my_button2"
         android:onClick="toTuVan"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_mua_dap_an"
         app:layout_constraintStart_toEndOf="@+id/imageButton_goi_dien_nguoi_than"
         app:layout_constraintTop_toTopOf="@+id/imageButton_goi_dien_nguoi_than"
         app:srcCompat="@mipmap/ic_trogiupkhangia" />

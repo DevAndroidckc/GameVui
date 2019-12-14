@@ -25,7 +25,7 @@ public class Menu extends AppCompatActivity {
     }
 
     public void Option(View view) {
-        Intent intent = new Intent(this,ChoiGame.class);
+        Intent intent = new Intent(this,ChoiGameActivity.class);
         startActivity(intent);
     }
 
