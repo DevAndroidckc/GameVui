@@ -3,6 +3,7 @@ package com.cdth17pm.doraiq;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,11 +63,16 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     private  int id_linhvuc;
     private Button btnTiepTheo;
     private TextView soCau;
+    int mdefault;
+    private String kqa,kqb,kqc,kqd;
+    private TextView goiDien;
     View incLinhVuc,incCauHoi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choi_game);
+        final int mColor= ContextCompat.getColor(this,R.color.colorPrimary);
+        mdefault=ContextCompat.getColor(this,R.color.colordefault);
         incLinhVuc=findViewById(R.id.inc_linhvuc);
         incCauHoi=findViewById(R.id.inc_cauhoi);
         linhvuc1=findViewById(R.id.button_LinhVuc1);
@@ -74,7 +80,8 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         linhvuc3=findViewById(R.id.button_LinhVuc3);
         linhvuc4=findViewById(R.id.button_LinhVuc4);
         btnTiepTheo=findViewById(R.id.button_TiepTheo);
-        soCau=findViewById(R.id.textView_So_Cau_Hoi);
+        goiDien=findViewById(R.id.textView_goidien);
+
         if(getSupportLoaderManager().getLoader(0)!=null) {
             getSupportLoaderManager().initLoader(0, null , this);
         }
@@ -89,6 +96,46 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         mDapAnB=findViewById(R.id.button_dap_an_b);
         mDapAnC=findViewById(R.id.button_dap_an_c);
         mDapAnD=findViewById(R.id.button_dap_an_d);
+        btnDapAnA=findViewById(R.id.button_dap_an_a);
+        btnDapAnB=findViewById(R.id.button_dap_an_b);
+        btnDapAnC=findViewById(R.id.button_dap_an_c);
+        btnDapAnD=findViewById(R.id.button_dap_an_d);
+        btnDapAnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnDapAnA.setBackgroundColor(mColor);
+                btnDapAnB.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnDapAnB.setBackgroundColor(mColor);
+                btnDapAnA.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnDapAnC.setBackgroundColor(mColor);
+                btnDapAnA.setEnabled(false);
+                btnDapAnB.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnDapAnD.setBackgroundColor(mColor);
+                btnDapAnA.setEnabled(false);
+                btnDapAnB.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+            }
+        });
         btnCallActivityMain=findViewById(R.id.imageButton_tro_ve);
         btnCallActivityMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +183,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi1(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
+
         id_linhvuc=Listid[0];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -146,6 +194,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi2(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
+
+
+
         id_linhvuc=Listid[1];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -156,6 +207,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi3(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
+
         id_linhvuc=Listid[2];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -166,6 +218,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi4(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
+
         id_linhvuc=Listid[3];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -222,51 +275,56 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                     String noiDung=itemsArray.getJSONObject(i).getString("noi_dung");
                     mNoiDung.setText(noiDung);
                     String dapAnA=itemsArray.getJSONObject(i).getString("phuong_an_a");
-                    //String gana=mDapAnA.getText().toString();
-                    //a = mDapAnA.getText()+" "+dapAnA;
+
+                    kqa=mDapAnA.toString();
+                    kqa=kqa.substring(0,1);
                     mDapAnA.setText(dapAnA);
                     String dapAnB=itemsArray.getJSONObject(i).getString("phuong_an_b");
-                    //String ganb=mDapAnB.getText().toString();
-                   // String b = mDapAnB.getText()+" "+dapAnB;
+
+                    kqb=mDapAnB.toString();
+                    kqb=kqb.substring(0,1);
                     mDapAnB.setText(dapAnB);
                     String dapAnC=itemsArray.getJSONObject(i).getString("phuong_an_c");
-                    //String ganc=mDapAnC.getText().toString();
-                    //String c = mDapAnC.getText()+" "+dapAnC;
+
+                    kqc=mDapAnC.toString();
+                    kqc=kqc.substring(0,1);
                     mDapAnC.setText(dapAnC);
                     String dapAnD=itemsArray.getJSONObject(i).getString("phuong_an_d");
-                    //String gand=mDapAnD.getText().toString();
-                    //String d = mDapAnD.getText()+" "+dapAnD;
+
+                    kqd=mDapAnD.toString();
+                    kqd=kqd.substring(0,1);
                     mDapAnD.setText(dapAnD);
                     String DapAn = itemsArray.getJSONObject(i).getString("dap_an");
                     dapan=DapAn;
-                    if(dapAnA.equals(dapan))
+
+                    if(kqa.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
-                        ada = 65;
+                        ada = random.nextInt(100);
                         bda = random.nextInt(100-ada);
                         cda = random.nextInt(100-ada-bda);
                         dda = 100-ada-bda-cda;
                     }
-                    if(dapAnB.equals(dapan))
+                    if(kqb.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
-                        bda =  65;
+                        bda =  random.nextInt(100);
                         ada = random.nextInt(100-bda);
                         cda = random.nextInt(100-bda-ada);
                         dda = 100-ada-bda-cda;
                     }
-                    if(dapAnC.equals(dapan))
+                    if(kqc.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
-                        cda = 65;
+                        cda = random.nextInt(100);
                         bda = random.nextInt(100-cda);
                         ada = random.nextInt(100-cda-bda);
                         dda = 100-ada-bda-cda;
                     }
-                    if(dapAnD.equals(dapan))
+                    if (kqd.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
-                        dda = 65;
+                        dda =  random.nextInt(100);
                         bda = random.nextInt(100-dda);
                         cda = random.nextInt(100-dda-bda);
                         ada = 100-dda-bda-cda;
@@ -299,22 +357,22 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
             if (rDapAn1 == 0 || rDapAn2 == 0) {
                 btnDapAnA.setBackgroundColor(Color.GRAY);
                 btnDapAnA.setClickable(false);
-                btnDapAnA.setText("");
+
             }
             if (rDapAn1 == 1 || rDapAn2 == 1) {
                 btnDapAnB.setBackgroundColor(Color.GRAY);
                 btnDapAnB.setClickable(false);
-                btnDapAnB.setText("");
+
             }
             if (rDapAn1 == 2 || rDapAn2 == 2) {
                 btnDapAnC.setBackgroundColor(Color.GRAY);
                 btnDapAnC.setClickable(false);
-                btnDapAnC.setText("");
+
             }
             if (rDapAn1 == 3 || rDapAn2 == 3) {
                 btnDapAnD.setBackgroundColor(Color.GRAY);
                 btnDapAnD.setClickable(false);
-                btnDapAnD.setText("");
+
             }
         }
     }
@@ -324,7 +382,6 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         dialog.setContentView(R.layout.bieudo);
         dialog.setCanceledOnTouchOutside(false);//->Click vào bên ngoài thì đóng dialog
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
-
         toTuVan(dialog);
         dialog.show();
     }
@@ -373,16 +430,33 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     }
 
     public void tiepTheo(View view) {
-
         incCauHoi.setVisibility(View.INVISIBLE);
         incLinhVuc.setVisibility(View.VISIBLE);
-        mDapAnA.setText("");
-        mDapAnB.setText("");
-        mDapAnC.setText("");
-        mDapAnD.setText("");
 
+        btnDapAnA.setBackgroundColor(mdefault);
+        btnDapAnB.setBackgroundColor(mdefault);
+        btnDapAnC.setBackgroundColor(mdefault);
+        btnDapAnD.setBackgroundColor(mdefault);
+
+        btnDapAnA.setEnabled(true);
+        btnDapAnB.setEnabled(true);
+        btnDapAnC.setEnabled(true);
+        btnDapAnD.setEnabled(true);
 
     }
 
 
+    public void goiDienThoai(View view) {
+        final Dialog dialog= new Dialog(this);
+        dialog.setContentView(R.layout.dialog_goinguoithan);
+        dialog.setCanceledOnTouchOutside(false);
+        goiDienThoai(dialog);
+        dialog.show();
+    }
+    public  void goiDienThoai(Dialog dialog)
+    {
+        String[] label=new String[]{"A","B","C","D"};
+        Random rd = new Random();
+
+    }
 }
