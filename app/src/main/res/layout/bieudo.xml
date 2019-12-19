@@ -6,7 +6,7 @@
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
-    android:paddingBottom="48dp"
+    android:paddingBottom="16dp"
     tools:context=".MainActivity">
 
     <com.github.mikephil.charting.charts.BarChart

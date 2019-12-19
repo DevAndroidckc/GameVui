@@ -66,6 +66,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     int mdefault;
     private String kqa,kqb,kqc,kqd;
     private TextView goiDien;
+    private ImageButton imgButton5050;
     View incLinhVuc,incCauHoi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         linhvuc4=findViewById(R.id.button_LinhVuc4);
         btnTiepTheo=findViewById(R.id.button_TiepTheo);
         goiDien=findViewById(R.id.textView_goidien);
+        imgButton5050=findViewById(R.id.imageButton_5050);
 
         if(getSupportLoaderManager().getLoader(0)!=null) {
             getSupportLoaderManager().initLoader(0, null , this);
@@ -161,6 +163,8 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                 dialog.show();
             }
         });
+
+        GoiDienNguoiThan();
         final TextView DemNguoc= findViewById(R.id.textView_dem_nguoc);
         countDownTimer =new CountDownTimer(30000,1000) {
             @Override
@@ -305,15 +309,15 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                         cda = random.nextInt(100-ada-bda);
                         dda = 100-ada-bda-cda;
                     }
-                    if(kqb.equalsIgnoreCase(dapan))
+                    else if(kqb.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
-                        bda =  random.nextInt(100);
+                        bda = random.nextInt(100);
                         ada = random.nextInt(100-bda);
                         cda = random.nextInt(100-bda-ada);
                         dda = 100-ada-bda-cda;
                     }
-                    if(kqc.equalsIgnoreCase(dapan))
+                    else if(kqc.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
                         cda = random.nextInt(100);
@@ -321,7 +325,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                         ada = random.nextInt(100-cda-bda);
                         dda = 100-ada-bda-cda;
                     }
-                    if (kqd.equalsIgnoreCase(dapan))
+                   else  if (kqd.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
                         dda =  random.nextInt(100);
@@ -345,36 +349,41 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     }
 
     public void click5050(View view){
-        final int dapAnDung=0;
+        final int dapAnDung=1;
         Random rd = new Random();
         int rDapAn1=rd.nextInt(3);
         int rDapAn2=rd.nextInt(3);
-        while(rDapAn1==rDapAn2)
+        while(rDapAn1 == dapAnDung)
+        {
+            rDapAn1 = rd.nextInt(3);
+        }
+        while(rDapAn2 == dapAnDung || rDapAn2 == rDapAn1)
         {
             rDapAn2 = rd.nextInt(3);
-        }
-        if(rDapAn1 !=dapAnDung && rDapAn2!=dapAnDung) {
-            if (rDapAn1 == 0 || rDapAn2 == 0) {
-                btnDapAnA.setBackgroundColor(Color.GRAY);
-                btnDapAnA.setClickable(false);
-
-            }
-            if (rDapAn1 == 1 || rDapAn2 == 1) {
-                btnDapAnB.setBackgroundColor(Color.GRAY);
-                btnDapAnB.setClickable(false);
-
-            }
-            if (rDapAn1 == 2 || rDapAn2 == 2) {
-                btnDapAnC.setBackgroundColor(Color.GRAY);
-                btnDapAnC.setClickable(false);
-
-            }
-            if (rDapAn1 == 3 || rDapAn2 == 3) {
-                btnDapAnD.setBackgroundColor(Color.GRAY);
-                btnDapAnD.setClickable(false);
-
+            while (rDapAn2 == rDapAn1)
+            {
+                rDapAn2 = rd.nextInt(3);
             }
         }
+
+        if (rDapAn1 == 0 || rDapAn2 == 0) {
+            btnDapAnA.setBackgroundColor(Color.GRAY);
+            btnDapAnA.setClickable(false);
+        }
+        if (rDapAn1 == 1 || rDapAn2 == 1) {
+            btnDapAnA.setBackgroundColor(Color.GRAY);
+            btnDapAnB.setClickable(false);
+        }
+        if (rDapAn1 == 2 || rDapAn2 == 2) {
+            btnDapAnA.setBackgroundColor(Color.GRAY);
+            btnDapAnC.setClickable(false);
+        }
+        if (rDapAn1 == 3 || rDapAn2 == 3) {
+            btnDapAnA.setBackgroundColor(Color.GRAY);
+            btnDapAnD.setClickable(false);
+        }
+        imgButton5050.setClickable(false);
+        imgButton5050.setBackgroundColor(Color.GRAY);
     }
 
     public void toTuVan(View view) {
@@ -405,7 +414,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             final String[] labels=new String[]{"A","B","C","D"};
             IndexAxisValueFormatter formatter=new IndexAxisValueFormatter(labels);
-            xAxis.setTextSize(20f);
+            xAxis.setTextSize(18f);
             xAxis.setGranularity(1f);
 
             xAxis.setValueFormatter(formatter);
@@ -446,17 +455,46 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     }
 
 
-    public void goiDienThoai(View view) {
-        final Dialog dialog= new Dialog(this);
-        dialog.setContentView(R.layout.dialog_goinguoithan);
-        dialog.setCanceledOnTouchOutside(false);
-        goiDienThoai(dialog);
-        dialog.show();
-    }
-    public  void goiDienThoai(Dialog dialog)
+    public void GoiDienNguoiThan()
     {
-        String[] label=new String[]{"A","B","C","D"};
-        Random rd = new Random();
-
+        final ImageButton imgButtonGoiDien;
+        imgButtonGoiDien = findViewById(R.id.imageButton_goi_dien_nguoi_than);
+        imgButtonGoiDien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(ChoiGameActivity.this);
+                dialog.setContentView(R.layout.dialog_goinguoithan);
+                dialog.setCancelable(false);
+                TextView tvDapAn = dialog.findViewById(R.id.textView_goidien);
+                Random rd = new Random();
+                int randomdapan = rd.nextInt(3);
+                if(randomdapan == 0 )
+                {
+                    tvDapAn.setText("A");
+                }
+                else if(randomdapan == 1)
+                {
+                    tvDapAn.setText("B");
+                }
+                else if(randomdapan == 2)
+                {
+                    tvDapAn.setText("C");
+                }
+                else if(randomdapan == 3)
+                {
+                    tvDapAn.setText("D");
+                }
+                dialog.show();
+                Button btnDong = dialog.findViewById(R.id.button_Dong);
+                btnDong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                imgButtonGoiDien.setClickable(false);
+                imgButtonGoiDien.setBackgroundColor(Color.GRAY);
+            }
+        });
     }
 }
