@@ -7,17 +7,6 @@
     tools:context=".BuyCredit"
     android:background="@drawable/anhnen1">
 
-    <TextView
-        android:id="@+id/textView_Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="60dp"
-        android:text="Bảo Bối"
-        android:textColor="#A52B04"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="40dp"
@@ -29,7 +18,7 @@
         app:srcCompat="@mipmap/ic_coin1" />
 
     <TextView
-        android:id="@+id/textView_coin"
+        android:id="@+id/textView_tongCredit_lv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -54,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_500"
         android:layout_width="158dp"
         android:layout_height="106dp"
         android:layout_marginStart="35dp"
@@ -68,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_Muacredit" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_1000"
         android:layout_width="158dp"
         android:layout_height="106dp"
         android:layout_marginLeft="25dp"
@@ -77,11 +66,11 @@
         android:text="1000"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2" />
+        app:layout_constraintStart_toEndOf="@+id/button_500"
+        app:layout_constraintTop_toTopOf="@+id/button_500" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button_3000"
         android:layout_width="158dp"
         android:layout_height="106dp"
         android:layout_marginTop="30dp"
@@ -90,11 +79,11 @@
         android:text="3000"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintStart_toStartOf="@+id/button_500"
+        app:layout_constraintTop_toBottomOf="@+id/button_500" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/button_5000"
         android:layout_width="158dp"
         android:layout_height="106dp"
         android:layout_marginLeft="25dp"
@@ -103,8 +92,20 @@
         android:text="5000"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/button6"
-        app:layout_constraintStart_toEndOf="@+id/button7"
-        app:layout_constraintTop_toTopOf="@+id/button7" />
+        app:layout_constraintEnd_toEndOf="@+id/button_1000"
+        app:layout_constraintStart_toEndOf="@+id/button_3000"
+        app:layout_constraintTop_toTopOf="@+id/button_3000" />
+
+    <Button
+        android:id="@+id/button_trove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Về menu"
+        android:onClick="luuCredit"
+        android:background="@drawable/my_button1"
+        app:layout_constraintEnd_toEndOf="@+id/button_5000"
+        app:layout_constraintStart_toStartOf="@+id/button_3000"
+        app:layout_constraintTop_toBottomOf="@+id/button_3000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

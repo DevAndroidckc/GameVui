@@ -60,14 +60,24 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     private Button linhvuc4;
     String[] Listlinhvuc = new String[4];
     int[] Listid = new int[4];
+
     private  int id_linhvuc;
-    private Button btnTiepTheo;
+    private   Button[] Listbutton=new Button[4];
+    int dapandung=0;
+    int dem=0;
+    int socau=0;
+    int tongsocau;
     private TextView soCau;
+    private Button btnTiepTheo;
     int mdefault;
     private String kqa,kqb,kqc,kqd;
     private TextView goiDien;
     private ImageButton imgButton5050;
     View incLinhVuc,incCauHoi;
+    private TextView tv_tongCredit;
+    private  String tongCredit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,13 +93,18 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         btnTiepTheo=findViewById(R.id.button_TiepTheo);
         goiDien=findViewById(R.id.textView_goidien);
         imgButton5050=findViewById(R.id.imageButton_5050);
+        tv_tongCredit=findViewById(R.id.textView_tongCredit_lv);
+        Intent intent=getIntent();
+        tongCredit=intent.getStringExtra("credit_lv");
+        tv_tongCredit.setText(tongCredit);
+        soCau=findViewById(R.id.textView_So_Cau_Hoi);
 
         if(getSupportLoaderManager().getLoader(0)!=null) {
             getSupportLoaderManager().initLoader(0, null , this);
         }
         getSupportLoaderManager().restartLoader(0,null,this);
 
-        Intent intent =getIntent();
+         intent =getIntent();
         int id = intent.getIntExtra("linh_vuc_id",0);
         Bundle bundle =new Bundle();
         bundle.putInt("idLinhVuc",id);
@@ -98,10 +113,17 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         mDapAnB=findViewById(R.id.button_dap_an_b);
         mDapAnC=findViewById(R.id.button_dap_an_c);
         mDapAnD=findViewById(R.id.button_dap_an_d);
+
         btnDapAnA=findViewById(R.id.button_dap_an_a);
         btnDapAnB=findViewById(R.id.button_dap_an_b);
         btnDapAnC=findViewById(R.id.button_dap_an_c);
         btnDapAnD=findViewById(R.id.button_dap_an_d);
+        Listbutton[0]=btnDapAnA;
+        Listbutton[1]=btnDapAnB;
+        Listbutton[2]=btnDapAnC;
+        Listbutton[3]=btnDapAnD;
+
+
         btnDapAnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +131,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                 btnDapAnB.setEnabled(false);
                 btnDapAnC.setEnabled(false);
                 btnDapAnD.setEnabled(false);
+
             }
         });
         btnDapAnB.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +210,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi1(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
+        tongsocau=socau+1;
+        soCau.setText(tongsocau+"");
+        socau=tongsocau;
 
         id_linhvuc=Listid[0];
         if(getSupportLoaderManager().getLoader(1)!=null){
@@ -198,9 +224,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi2(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
-
-
-
+        tongsocau=socau+1;
+        soCau.setText(tongsocau+"");
+        socau=tongsocau;
         id_linhvuc=Listid[1];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -211,7 +237,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi3(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
-
+        tongsocau=socau+1;
+        soCau.setText(tongsocau+"");
+        socau=tongsocau;
         id_linhvuc=Listid[2];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -222,7 +250,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void moCauHoi4(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
         incLinhVuc.setVisibility(View.INVISIBLE);
-
+        tongsocau=socau+1;
+        soCau.setText(tongsocau+"");
+        socau=tongsocau;
         id_linhvuc=Listid[3];
         if(getSupportLoaderManager().getLoader(1)!=null){
             getSupportLoaderManager().initLoader(1,null,this);
@@ -349,41 +379,36 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     }
 
     public void click5050(View view){
-        final int dapAnDung=1;
-        Random rd = new Random();
-        int rDapAn1=rd.nextInt(3);
-        int rDapAn2=rd.nextInt(3);
-        while(rDapAn1 == dapAnDung)
+        imgButton5050.setClickable(false);
+        imgButton5050.setBackgroundColor(Color.GRAY);
+        if(dapan.equalsIgnoreCase("A"))
         {
-            rDapAn1 = rd.nextInt(3);
+            dapandung = 0;
         }
-        while(rDapAn2 == dapAnDung || rDapAn2 == rDapAn1)
+        if(dapan.equalsIgnoreCase("B"))
         {
-            rDapAn2 = rd.nextInt(3);
-            while (rDapAn2 == rDapAn1)
-            {
-                rDapAn2 = rd.nextInt(3);
+            dapandung = 1;
+        }
+        if(dapan.equalsIgnoreCase("C"))
+        {
+            dapandung = 2;
+        }
+        if(dapan.equalsIgnoreCase("D"))
+        {
+            dapandung = 3;
+        }
+        int dem =0;
+        for (int i =0; i <4;i++){
+            if(dapandung!=i){
+               Listbutton[i].setText("");
+                Listbutton[i].setClickable(false);
+                dem++;
+            }
+            if(dem==2){
+                return;
             }
         }
 
-        if (rDapAn1 == 0 || rDapAn2 == 0) {
-            btnDapAnA.setBackgroundColor(Color.GRAY);
-            btnDapAnA.setClickable(false);
-        }
-        if (rDapAn1 == 1 || rDapAn2 == 1) {
-            btnDapAnA.setBackgroundColor(Color.GRAY);
-            btnDapAnB.setClickable(false);
-        }
-        if (rDapAn1 == 2 || rDapAn2 == 2) {
-            btnDapAnA.setBackgroundColor(Color.GRAY);
-            btnDapAnC.setClickable(false);
-        }
-        if (rDapAn1 == 3 || rDapAn2 == 3) {
-            btnDapAnA.setBackgroundColor(Color.GRAY);
-            btnDapAnD.setClickable(false);
-        }
-        imgButton5050.setClickable(false);
-        imgButton5050.setBackgroundColor(Color.GRAY);
     }
 
     public void toTuVan(View view) {
@@ -395,7 +420,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         dialog.show();
     }
     public void toTuVan(Dialog dialog){
-        {
+
             BarChart barChart =dialog.findViewById(R.id.barChart);
 
             ArrayList<BarEntry> datas = new ArrayList<>();
@@ -435,7 +460,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
             barChart.animateY(3000);
 
             barChart.invalidate();
-        }
+
     }
 
     public void tiepTheo(View view) {

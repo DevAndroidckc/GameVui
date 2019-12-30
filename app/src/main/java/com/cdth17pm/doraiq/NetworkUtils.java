@@ -1,5 +1,7 @@
 package com.cdth17pm.doraiq;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -15,7 +17,9 @@ import java.util.Map;
 public class NetworkUtils {
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     //private static final String BASE_URL =  "http://10.0.3.2:8000/"; // Genymotion
-    private static final String BASE_URL =  "http://10.0.2.2:8000/api/"; // AVD
+    public static final String BASE_URL =  "http://10.0.2.2:8000/api/"; // AVD
+    //URI Người chơi
+    public static final String URI_NGUOI_CHOI_THEM ="dang-ki" ;
 
     static String getJSONData(String uri, String method) {
         HttpURLConnection urlConnection = null;
@@ -41,6 +45,12 @@ public class NetworkUtils {
         }
         Log.d("TEST", jsonString);
         return jsonString;
+    }
+    public static ProgressDialog showProress(Context context){
+        final ProgressDialog pgWait = new ProgressDialog(context);
+        pgWait.setTitle("Vui lòng đợi");
+        pgWait.setMessage("Đợi tí");
+        return pgWait;
     }
 
     static String getJSONData(String uri, String method, Object[] nameParams, Object[] valueParams) {

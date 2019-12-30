@@ -45,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_Re_Username" />
+
     <EditText
         android:id="@+id/editText_Re_Password"
         android:layout_width="300dp"
@@ -53,11 +54,12 @@
         android:background="@drawable/shape"
         android:drawableLeft="@drawable/ic_action_username"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Mật khẩu"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_Re_Email" />
+
     <EditText
         android:id="@+id/editText_Re_Repassword"
         android:layout_width="300dp"
@@ -66,8 +68,8 @@
         android:background="@drawable/shape"
         android:drawableLeft="@drawable/ic_action_username"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Xác nhận mật khẩu"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_Re_Password" />
@@ -78,6 +80,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="60dp"
         android:text="Đăng kí"
+        android:onClick="DangKy"
         android:background="@drawable/my_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

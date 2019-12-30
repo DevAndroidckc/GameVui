@@ -39,6 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
     <EditText
         android:id="@+id/editText_Ma_Username"
         android:layout_width="300dp"
@@ -47,11 +48,12 @@
         android:background="@drawable/shape"
         android:drawableLeft="@drawable/ic_action_username"
         android:ems="10"
-        android:text="Nguyễn Thanh Võ"
+        android:hint="Tên đăng nhập"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Changepic" />
+
     <EditText
         android:id="@+id/editText_Ma_Email"
         android:layout_width="300dp"
@@ -60,7 +62,7 @@
         android:background="@drawable/shape"
         android:drawableLeft="@drawable/ic_action_gmail"
         android:ems="10"
-        android:text="3qkute2014@gmail.com"
+        android:hint="Mật khẩu"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

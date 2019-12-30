@@ -73,7 +73,7 @@
         app:srcCompat="@mipmap/ic_coin1" />
 
     <TextView
-        android:id="@+id/textView_coin"
+        android:id="@+id/textView_tongCredit_lv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -133,7 +133,7 @@
         android:onClick="click5050"
         app:layout_constraintEnd_toStartOf="@+id/imageButton_goi_dien_nguoi_than"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_coin"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tongCredit_lv"
         app:srcCompat="@mipmap/ic_5050" />
 
     <ImageButton
