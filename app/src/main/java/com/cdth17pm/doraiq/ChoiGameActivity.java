@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,8 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
 
     private  int id_linhvuc;
     private   Button[] Listbutton=new Button[4];
-    int dapandung=0;
+    private String phuongandung;
+    private int dapandung=0;
     int dem=0;
     int socau=0;
     int tongsocau;
@@ -76,8 +78,27 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     View incLinhVuc,incCauHoi;
     private TextView tv_tongCredit;
     private  String tongCredit;
+    private TextView tvTongSoCredit;
+    private TextView textView_Diem;
+    private int diem=0;
+    private int tongsodiem;
 
-
+    private int dem_trai_tim = 0;
+    private String phuongana;
+    private String phuonganb;
+    private String phuonganc;
+    private String phuongand;
+    private String kytu;
+    private ImageView imvTraiTim1;
+    private ImageView imvTraiTim2;
+    private ImageView imvTraiTim3;
+    private ImageView imvTraiTim4;
+    private ImageView imvTraiTim5;
+    private ImageView[] listTraiTim = new ImageView[5];
+    private int id_imView_Traitim = 0;
+    private ImageView imvMuaDapAn;
+    private TextView textView_dapan;
+    private int id_dapan_dung;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +111,24 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         linhvuc2=findViewById(R.id.button_LinhVuc2);
         linhvuc3=findViewById(R.id.button_LinhVuc3);
         linhvuc4=findViewById(R.id.button_LinhVuc4);
+        imvTraiTim1 = findViewById(R.id.imageView_tym1);
+        imvTraiTim2 = findViewById(R.id.imageView_tym2);
+        imvTraiTim3 = findViewById(R.id.imageView_tym3);
+        imvTraiTim4 = findViewById(R.id.imageView_tym4);
+        imvTraiTim5 = findViewById(R.id.imageView_tym5);
+        listTraiTim[0]=imvTraiTim1;
+        listTraiTim[1]=imvTraiTim2;
+        listTraiTim[2]=imvTraiTim3;
+        listTraiTim[3]=imvTraiTim4;
+        listTraiTim[4]=imvTraiTim5;
+        textView_Diem=findViewById(R.id.textView_Diem);
+        //textView_dapan = findViewById(R.id.);
         btnTiepTheo=findViewById(R.id.button_TiepTheo);
         goiDien=findViewById(R.id.textView_goidien);
         imgButton5050=findViewById(R.id.imageButton_5050);
+        imvMuaDapAn=findViewById(R.id.imageButton_mua_dap_an);
         tv_tongCredit=findViewById(R.id.textView_tongCredit_lv);
+        tvTongSoCredit=findViewById(R.id.textView_tongCredit_lv);
         Intent intent=getIntent();
         tongCredit=intent.getStringExtra("credit_lv");
         tv_tongCredit.setText(tongCredit);
@@ -118,13 +153,14 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
         btnDapAnB=findViewById(R.id.button_dap_an_b);
         btnDapAnC=findViewById(R.id.button_dap_an_c);
         btnDapAnD=findViewById(R.id.button_dap_an_d);
+
         Listbutton[0]=btnDapAnA;
         Listbutton[1]=btnDapAnB;
         Listbutton[2]=btnDapAnC;
         Listbutton[3]=btnDapAnD;
 
 
-        btnDapAnA.setOnClickListener(new View.OnClickListener() {
+       /* btnDapAnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnDapAnA.setBackgroundColor(mColor);
@@ -160,16 +196,16 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                 btnDapAnB.setEnabled(false);
                 btnDapAnC.setEnabled(false);
             }
-        });
+        });*/
         btnCallActivityMain=findViewById(R.id.imageButton_tro_ve);
         btnCallActivityMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(ChoiGameActivity.this);
                 dialog.setContentView(R.layout.dialog_thoat);
-                TextView mhoi=(TextView) dialog.findViewById(R.id.textViewHoi);
-                Button mYes=(Button) dialog.findViewById(R.id.button_yes);
-                Button mNo=(Button) dialog.findViewById(R.id.button_No);
+                TextView mhoi=(TextView)dialog.findViewById(R.id.textViewHoi);
+                Button mYes=(Button)dialog.findViewById(R.id.button_yes);
+                Button mNo=(Button)dialog.findViewById(R.id.button_No);
                 mYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -187,7 +223,9 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
             }
         });
 
+        // Gọi hàm trợ giúp từ  người thân
         GoiDienNguoiThan();
+
         final TextView DemNguoc= findViewById(R.id.textView_dem_nguoc);
         countDownTimer =new CountDownTimer(30000,1000) {
             @Override
@@ -206,6 +244,42 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
 
         };
         countDownTimer.start();
+        btnDapAnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Click_traloi(btnDapAnA,phuongana,mDapAnA);
+                btnDapAnB.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Click_traloi(btnDapAnB,phuonganb,mDapAnB);
+                btnDapAnA.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Click_traloi(btnDapAnC,phuonganc,mDapAnC);
+                btnDapAnA.setEnabled(false);
+                btnDapAnB.setEnabled(false);
+                btnDapAnD.setEnabled(false);
+            }
+        });
+        btnDapAnD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Click_traloi(btnDapAnD,phuongand,mDapAnD);
+                btnDapAnA.setEnabled(false);
+                btnDapAnB.setEnabled(false);
+                btnDapAnC.setEnabled(false);
+            }
+        });
     }
     public void moCauHoi1(View view) {
         incCauHoi.setVisibility(View.VISIBLE);
@@ -309,22 +383,22 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                     String noiDung=itemsArray.getJSONObject(i).getString("noi_dung");
                     mNoiDung.setText(noiDung);
                     String dapAnA=itemsArray.getJSONObject(i).getString("phuong_an_a");
-
+                    //kqa=dapAnA;
                     kqa=mDapAnA.toString();
                     kqa=kqa.substring(0,1);
                     mDapAnA.setText(dapAnA);
                     String dapAnB=itemsArray.getJSONObject(i).getString("phuong_an_b");
-
+                    //kqb=dapAnB;
                     kqb=mDapAnB.toString();
                     kqb=kqb.substring(0,1);
                     mDapAnB.setText(dapAnB);
                     String dapAnC=itemsArray.getJSONObject(i).getString("phuong_an_c");
-
+                    //kqc=dapAnC;
                     kqc=mDapAnC.toString();
                     kqc=kqc.substring(0,1);
                     mDapAnC.setText(dapAnC);
                     String dapAnD=itemsArray.getJSONObject(i).getString("phuong_an_d");
-
+                    //kqd=dapAnD;
                     kqd=mDapAnD.toString();
                     kqd=kqd.substring(0,1);
                     mDapAnD.setText(dapAnD);
@@ -339,7 +413,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                         cda = random.nextInt(100-ada-bda);
                         dda = 100-ada-bda-cda;
                     }
-                    else if(kqb.equalsIgnoreCase(dapan))
+                    if(kqb.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
                         bda = random.nextInt(100);
@@ -347,7 +421,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                         cda = random.nextInt(100-bda-ada);
                         dda = 100-ada-bda-cda;
                     }
-                    else if(kqc.equalsIgnoreCase(dapan))
+                    if(kqc.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
                         cda = random.nextInt(100);
@@ -355,7 +429,7 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                         ada = random.nextInt(100-cda-bda);
                         dda = 100-ada-bda-cda;
                     }
-                   else  if (kqd.equalsIgnoreCase(dapan))
+                   if (kqd.equalsIgnoreCase(dapan))
                     {
                         Random random = new Random();
                         dda =  random.nextInt(100);
@@ -381,19 +455,19 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
     public void click5050(View view){
         imgButton5050.setClickable(false);
         imgButton5050.setBackgroundColor(Color.GRAY);
-        if(dapan.equalsIgnoreCase("A"))
+        if(dapan.equals("A"))
         {
             dapandung = 0;
         }
-        if(dapan.equalsIgnoreCase("B"))
+        if(dapan.equals("B"))
         {
             dapandung = 1;
         }
-        if(dapan.equalsIgnoreCase("C"))
+        if(dapan.equals("C"))
         {
             dapandung = 2;
         }
-        if(dapan.equalsIgnoreCase("D"))
+        if(dapan.equals("D"))
         {
             dapandung = 3;
         }
@@ -521,5 +595,60 @@ public class ChoiGameActivity extends AppCompatActivity implements LoaderManager
                 imgButtonGoiDien.setBackgroundColor(Color.GRAY);
             }
         });
+    }
+    public void Click_traloi(Button btnPhuongAn, String phuongan, TextView mTextView){
+        phuongan = mTextView.getText().toString();
+        kytu = phuongan.substring(0,1);
+        dapan = phuongandung;
+
+        tongsodiem=diem+10;
+
+        if(kytu.equals(dapan)){
+            btnPhuongAn.setBackgroundColor(Color.BLUE);
+            textView_Diem.setText(+tongsodiem);
+            diem = tongsodiem;
+        }
+        else
+        {
+            btnPhuongAn.setBackgroundColor(Color.YELLOW);
+            if(id_imView_Traitim == 4){
+                Intent intent = new Intent(ChoiGameActivity.this,Menu.class);
+                Toast.makeText(ChoiGameActivity.this, "Tro choi ket thuc!!", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+            else
+            {
+                xoaTraiTim(id_imView_Traitim);
+                id_imView_Traitim++;
+                Toast.makeText(ChoiGameActivity.this, "Sai rồi", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    // Hàm mua đáp án
+    public void muaDapAn(View view) {
+        ImageView img_muaDapAn = findViewById(R.id.imageButton_mua_dap_an);
+        int soCredit = Integer.parseInt(tvTongSoCredit.getText().toString());
+        if (soCredit > 0) {
+
+            Listbutton[id_dapan_dung].callOnClick();
+            soCredit = soCredit-100;
+            String chuoi = soCredit + "";
+            tvTongSoCredit.setText(chuoi);
+
+        }
+        else
+        {
+            Toast.makeText(ChoiGameActivity.this, "Số dư Credit của bạn không đủ.", Toast.LENGTH_SHORT).show();
+
+            img_muaDapAn.setBackgroundColor(Color.GRAY);
+            img_muaDapAn.setClickable(false);
+        }
+
+    }
+
+    // Hàm xóa mạng người chơi
+    public void xoaTraiTim(int id){
+        listTraiTim[id].setImageResource(R.drawable.trumang);
     }
 }
